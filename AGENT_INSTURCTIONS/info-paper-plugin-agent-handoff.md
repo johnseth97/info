@@ -69,16 +69,16 @@ Commands:
 Permissions:
 
 ```text
-info.use       # allows receiving info HUD
-info.toggle    # allows toggling own HUD
-info.reload    # allows reloading config
+visualid.use       # allows receiving info HUD
+visualid.toggle    # allows toggling own HUD
+visualid.reload    # allows reloading config
 ```
 
 Recommended permission defaults:
 
-- `info.use`: true
-- `info.toggle`: true
-- `info.reload`: op
+- `visualid.use`: true
+- `visualid.toggle`: true
+- `visualid.reload`: op
 
 ## Suggested Config
 
@@ -258,7 +258,7 @@ Pseudo-flow:
 
 ```java
 for (Player player : Bukkit.getOnlinePlayers()) {
-    if (!player.hasPermission("info.use")) continue;
+    if (!player.hasPermission("visualid.use")) continue;
     if (!isHudEnabled(player)) continue;
 
     TargetInfo info = targetInfoService.getTargetInfo(player, config);
@@ -399,10 +399,10 @@ The plugin is complete for v1 when:
 
 - Server starts cleanly with the plugin installed
 - `/plugins` shows Info enabled
-- `/info toggle` works
-- `/info reload` works for admins
-- Players with `info.use` see block info in actionbar
-- Players without `info.use` do not see HUD info
+- `/visualid toggle` works
+- `/visualid reload` works for admins
+- Players with `visualid.use` see block info in actionbar
+- Players without `visualid.use` do not see HUD info
 - The HUD updates at the configured interval
 - The max distance setting works
 - The plugin does not require client mods
