@@ -1,0 +1,13 @@
+enabled-by-default: true
+update-interval-ticks: 5
+max-distance: 8.0
+prefer-entities: true
+display-mode: actionbar
+
+show:
+  material-name: true
+  namespaced-key: true
+  coordinates: true
+  biome: false
+  light-level: false
+  entity-health: true

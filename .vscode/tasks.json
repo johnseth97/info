@@ -1,0 +1,42 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build",
+      "type": "shell",
+      "command": "./gradlew clean build",
+      "group": {
+        "kind": "build",
+        "isDefault": true,
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+      },
+      "problemMatcher": "$javac",
+    },
+    {
+      "label": "Deploy (Remote SCP)",
+      "type": "shell",
+      // Reads DEPLOY_USER, DEPLOY_HOST, DEPLOY_PATH, DEPLOY_OWNER from .env
+      // Copy .env.example to .env and fill in your values.
+      "command": "set -a && source .env && set +a && JAR=$(ls -t build/libs/Info-*.jar | head -1) && JARNAME=$(basename \"$JAR\") && scp \"$JAR\" \"$DEPLOY_USER@$DEPLOY_HOST:/tmp/$JARNAME\" && ssh -t \"$DEPLOY_USER@$DEPLOY_HOST\" \"sudo rm -f $DEPLOY_PATH/Info-*.jar && sudo mv /tmp/$JARNAME $DEPLOY_PATH && sudo chown $DEPLOY_OWNER $DEPLOY_PATH/$JARNAME && sudo minecraft-paper recreate\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+      },
+      "problemMatcher": [],
+    },
+    {
+      "label": "Build & Deploy",
+      "dependsOn": ["Build", "Deploy (Remote SCP)"],
+      "dependsOrder": "sequence",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+      },
+      "problemMatcher": [],
+    },
+  ],
+}

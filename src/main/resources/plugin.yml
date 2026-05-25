@@ -1,0 +1,23 @@
+name: Info
+version: 1.0.0
+main: com.johnseth97.info.InfoPlugin
+api-version: '1.21'
+author: johnseth97
+description: Lightweight server-side block/entity info HUD for Paper.
+
+commands:
+  info:
+    description: Toggle or manage the Info HUD.
+    usage: /info [toggle|reload|status|mode]
+    permission: info.use
+
+permissions:
+  info.use:
+    description: Allows receiving the Info HUD.
+    default: true
+  info.toggle:
+    description: Allows toggling the Info HUD on/off.
+    default: true
+  info.reload:
+    description: Allows reloading the Info config.
+    default: op

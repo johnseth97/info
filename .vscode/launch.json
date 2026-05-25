@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // Runs Build & Deploy, then attaches the Java debugger to the remote Paper JVM.
+            // DEPLOY_HOST in tasks.json options.env must match hostName here.
+            // Paper must be started with: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+            "name": "Build & Deploy to Server",
+            "type": "java",
+            "request": "attach",
+            "preLaunchTask": "Build & Deploy",
+            "hostName": "bridle-fedora-desktop.local",
+            "port": 5005
+        }
+    ]
+}
