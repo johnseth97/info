@@ -10,6 +10,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.lang.reflect.Field;
 
+/**
+ * Main plugin entry point that wires config, services, and command registration.
+ */
 public class VisualIdPlugin extends JavaPlugin {
 
     private VisualIdConfig infoConfig;
@@ -53,6 +56,7 @@ public class VisualIdPlugin extends JavaPlugin {
     }
 
     public void applyInfoConfig() {
+        // Rebuild the config snapshot and restart the HUD with the new settings.
         infoConfig = new VisualIdConfig(getConfig());
         hudService.reload(infoConfig);
     }
@@ -63,6 +67,7 @@ public class VisualIdPlugin extends JavaPlugin {
     }
 
     private void registerDynamic(String name, VisualIdCommand cmd) {
+        // Bukkit doesn't expose CommandMap directly, so we use reflection for aliases.
         try {
             Field field = Bukkit.getServer().getClass().getDeclaredField("commandMap");
             field.setAccessible(true);

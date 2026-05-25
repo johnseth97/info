@@ -10,10 +10,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 
+/**
+ * Periodically updates each player's action bar with target information.
+ */
 public class VisualIdHudService {
 
   private final Plugin plugin;
   private final TargetInfoService targetInfoService;
+  // Per-player toggle state; when absent, fall back to config.enabledByDefault.
   private final Map<UUID, Boolean> enabledOverrides = new HashMap<>();
 
   private BukkitTask task;
@@ -32,6 +36,7 @@ public class VisualIdHudService {
   public void start() {
     if (task != null) task.cancel();
 
+    // Schedule a repeating task that refreshes the HUD.
     task = Bukkit.getScheduler().runTaskTimer(
       plugin,
       this::tick,

@@ -1,5 +1,8 @@
 package com.johnseth97.visualid.util;
 
+/**
+ * String helpers for turning enum-style names into user-friendly labels.
+ */
 public final class NameUtil {
 
     private NameUtil() {}

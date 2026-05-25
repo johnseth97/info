@@ -2,6 +2,9 @@ package com.johnseth97.visualid.config;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
+/**
+ * Immutable snapshot of config.yml values with basic validation/clamping.
+ */
 public class VisualIdConfig {
 
     public final boolean enabledByDefault;

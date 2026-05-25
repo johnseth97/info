@@ -15,6 +15,9 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.RayTraceResult;
 
+/**
+ * Builds the HUD component for whatever the player is currently targeting.
+ */
 public class TargetInfoService {
 
     private static final Component SEP = Component.text("  ·  ", NamedTextColor.DARK_GRAY);
@@ -24,6 +27,7 @@ public class TargetInfoService {
         RayTraceResult blockResult;
 
         if (cfg.preferEntities) {
+            // Ray trace entities first when the config prefers them.
             entityResult = player.getWorld().rayTraceEntities(
                     player.getEyeLocation(),
                     player.getEyeLocation().getDirection(),
@@ -32,9 +36,11 @@ public class TargetInfoService {
             );
         }
 
+        // Always ray trace blocks so we can compare distances.
         blockResult = player.rayTraceBlocks(cfg.maxDistance, FluidCollisionMode.NEVER);
 
         if (cfg.preferEntities && entityResult != null && entityResult.getHitEntity() != null) {
+            // Choose whichever hit is closer to the player's eyes.
             double eDist = entityResult.getHitPosition().distanceSquared(player.getEyeLocation().toVector());
             double bDist = blockResult != null && blockResult.getHitBlock() != null
                     ? blockResult.getHitPosition().distanceSquared(player.getEyeLocation().toVector())

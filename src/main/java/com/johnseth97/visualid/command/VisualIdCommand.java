@@ -13,8 +13,12 @@ import org.bukkit.entity.Player;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Handles the /visual-id command and its subcommands.
+ */
 public class VisualIdCommand extends Command implements CommandExecutor, TabCompleter {
 
+    // Re-send the one-shot action bar a few times to keep it visible.
     private static final int ONE_SHOT_MULTIPLIER = 3;
 
     // Maps short section names (used in the command) to config.yml paths.
