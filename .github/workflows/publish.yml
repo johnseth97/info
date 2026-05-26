@@ -90,7 +90,6 @@ jobs:
           cat CHANGELOG.generated.md
 
       - name: Try Copilot changelog polish
-        if: ${{ secrets.COPILOT_ACCESS_TOKEN != '' }}
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.COPILOT_ACCESS_TOKEN }}
@@ -189,7 +188,7 @@ jobs:
   publish-modrinth:
     needs: prepare
     runs-on: ubuntu-latest
-    if: ${{ vars.MODRINTH_PROJECT_ID != '' && secrets.MODRINTH_TOKEN != '' }}
+    if: ${{ vars.MODRINTH_PROJECT_ID != '' }}
 
     env:
       RELEASE_VERSION: ${{ needs.prepare.outputs.version }}
@@ -232,7 +231,7 @@ jobs:
   publish-curseforge:
     needs: prepare
     runs-on: ubuntu-latest
-    if: ${{ vars.CURSEFORGE_PROJECT_ID != '' && secrets.CURSEFORGE_TOKEN != '' }}
+    if: ${{ vars.CURSEFORGE_PROJECT_ID != '' }}
 
     env:
       RELEASE_VERSION: ${{ needs.prepare.outputs.version }}
